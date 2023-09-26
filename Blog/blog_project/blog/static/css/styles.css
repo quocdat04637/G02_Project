@@ -1,0 +1,90 @@
+/* Style input fields */
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-form div {
+    width: 60%;
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form div {
+    width: 60%;
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.profile-form div {
+    width: 60%;
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.createpost-form div {
+    width: 60%;
+    padding: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid #eb2121;
+    border-radius: 5px;
+}
+/* Style error messages */
+.error-message {
+    color: red;
+}
+
+/* Style the submit button */
+.btn-register {
+    background-color: #3e8e41;
+    color: white;
+    border: none;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+}
+
+.btn-register:hover {
+    background-color: #4caf50;
+}
+
+.btn-register:active {
+    background-color: #45a049;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.nav-link:hover {
+    color: #9beb19;
+}
+
+.newest-post li a{
+    text-decoration: none;
+}
+
+.newest-post li{
+    list-style-type: none;
+}

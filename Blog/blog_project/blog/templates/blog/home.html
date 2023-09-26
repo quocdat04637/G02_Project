@@ -1,0 +1,108 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <!-- Carousel -->
+    <div id="demo1" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+        
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/enter_cate.png' %}" alt="Entertainment" class="d-block" style="width:100%; height:500px">
+                <div class="carousel-caption text-dark">
+                    <h3>Entertainment</h3>
+                    <p>We post many posts for entertainment purposes </p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/edu_cate.png' %}" alt="Edu" class="d-block" style="width:100%; height:500px">
+                <div class="carousel-caption text-dark">
+                    <h3>Education</h3>
+                    <p>Ideal place for sharing edu blogs</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/tourist_cate.png' %}" alt="Tourist" class="d-block" style="width:100%; height:500px">
+                <div class="carousel-caption text-dark">
+                    <h3>Tourist</h3>
+                    <p>Sharing tourist's passion together</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev slide" type="button" data-bs-target="#demo1" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon text-dark"></span>
+        </button>
+        <button class="carousel-control-next slide" type="button" data-bs-target="#demo1" data-bs-slide="next">
+            <span class="carousel-control-next-icon text-dark"></span>
+        </button>
+    </div>
+    
+    <div style="border-bottom: dashed; border-color: #198754; display: flex; justify-content: space-between; align-items: center;">
+        <h1 style="font-weight: bold; color: #198754; margin: 0;">Newest posts</h1>
+        <a href="{% url 'all_posts' %}" style="text-decoration: none; font-size: 30px; color:#198754">See all <i class="fa-solid fa-forward"></i></a>
+    </div>
+    
+
+    <!-- Danh sách bài viết -->
+    <ul class="newest-post">
+        {% for post in posts|slice:":5" %} {# Chỉ hiển thị 5 bài đầu tiên #}
+            <li>
+                <a href="{% url 'post_detail' post.pk %}" style="text-decoration: none;">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.author }} - {{ post.created_at }}</p>
+                </a>
+                
+                {% if user.is_authenticated %}
+                    {% if user.role == 'editor' and post.author == request.user %}
+                        <!-- Nút chỉnh sửa (tuỳ chọn) -->
+                        <a href="{% url 'edit_post' post.pk %}" class="btn btn-primary">Chỉnh sửa</a>
+                
+                        <!-- Nút xoá (tuỳ chọn) -->
+                        <a href="{% url 'delete_post' post.pk %}" class="btn btn-primary">Xoá</a>
+                    {% endif %}
+                {% endif %}
+            
+               
+            </li>
+        {% endfor %}
+        
+    </ul>
+    
+
+    <!-- Phân trang (tuỳ chọn) -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ posts.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current-page">{{ posts.number }}</span>
+
+            {% if posts.has_next %}
+                <a href="?page={{ posts.next_page_number }}">next</a>
+                <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+
+    <!-- Thành phần tìm kiếm và bộ lọc (tuỳ chọn) -->
+    <!-- Thẻ và thể loại (tuỳ chọn) -->
+    <!-- Thành phần chia sẻ xã hội (tuỳ chọn) -->
+
+{% endblock %}
+
+
